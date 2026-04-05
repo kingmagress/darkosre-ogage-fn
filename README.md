@@ -13,5 +13,8 @@ Somehow the change doesn't seem to be persistent. Ping me on discord if you know
 4. Run install_ogage_fn.sh
 
 ## Other details
-restore_ogage_r3.sh will restore the original R3 global hotkey. 
-Ogage folder will be the binaries for ogage-fn and ogage-r3. ogage-r3 will be redundant since there will be a backup of the original ogage binary.
+restore_ogage_r3.sh will restore the original R3 global hotkey.
+
+Ogage folder contains the binaries for ogage-fn and ogage-r3. 
+
+ogage-r3 will be redundant since there will be a backup of the original ogage binary.
