@@ -1,26 +1,40 @@
 #!/bin/bash
-
 set -e
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
-BACKUP_PATH="$SCRIPT_DIR/Ogage/ogage-original"
 
-# Check if backup exists
-if [ ! -f "$BACKUP_PATH" ]; then
-    echo "Backup file not found at $BACKUP_PATH"
-    exit 1
-fi
+# Targets
+TARGET_MAIN="/usr/local/bin/ogage"
+TARGET_SPK="/usr/local/bin/r36_config/ogage/ogage.SPK"
+TARGET_SPK_HP="/usr/local/bin/r36_config/ogage/ogage.SPK_HP"
+
+# Backup paths
+BACKUP_MAIN="$SCRIPT_DIR/Ogage/ogage-original"
+BACKUP_SPK="$SCRIPT_DIR/Ogage/ogage.SPK"
+BACKUP_SPK_HP="$SCRIPT_DIR/Ogage/ogage.SPK_HP"
+
+restore_if_exists() {
+    local src="$1"
+    local dst="$2"
+
+    if [ -f "$src" ]; then
+        echo "Restoring $dst from $src"
+        sudo cp -f "$src" "$dst"
+        sudo chmod 777 "$dst"
+    else
+        echo "Backup missing, cannot restore: $src"
+    fi
+}
 
 echo "Stopping ogage service..."
 sudo systemctl stop ogage.service
 
-echo "Restoring ogage from backup..."
-sudo cp -a "$BACKUP_PATH" /usr/local/bin/ogage
+echo "=== Restore Phase ==="
+restore_if_exists "$BACKUP_MAIN" "$TARGET_MAIN"
+restore_if_exists "$BACKUP_SPK" "$TARGET_SPK"
+restore_if_exists "$BACKUP_SPK_HP" "$TARGET_SPK_HP"
 
-echo "Setting permissions..."
-sudo chmod 777 /usr/local/bin/ogage
-
-echo "Starting ogage service..."
+echo "Restarting ogage service..."
 sudo systemctl start ogage.service
 
 echo "Restore complete."
