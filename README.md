@@ -1,4 +1,4 @@
-# darkos-ogage-fn
+# darkosre-ogage-fn
 
 ## Introduction
 This script will set your global hotkey to FN for dARKOSRE, just like AeolusUX/ArkOS-R3XS.
