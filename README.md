@@ -10,5 +10,7 @@ This script will set your global hotkey to FN for dARKOSRE, just like AeolusUX/A
 4. Run install_ogage_fn.sh
 
 ## Other details
-restore_ogage_r3.sh will restore the original R3 global hotkey from the ROMS partition's tool folder.
-You can also try to reboot your device to ensure the restoration.
+- restore_ogage_r3.sh will restore the original R3 global hotkey from the ROMS partition's tool folder. You can also try to reboot your device to ensure the restoration.
+- The Ogage-fn binary was compiled against https://github.com/christianhaitian/ogage/tree/rg351mp. This means it only has the vanilla controls.
+- If you require additional controls like controlling gamma or need the original dARKOSRE controls, you can compile against https://github.com/southoz/dArkOSRE-R36/tree/main/resources/github/ogage
+- You can also compile your own ogage source code as you like. The script is still usable as long as you replace the binary inside the Ogage folder with your compiled ogage.
